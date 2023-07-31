@@ -1,0 +1,4 @@
+#Git ignore local configuration
+
+.env
+node_modules

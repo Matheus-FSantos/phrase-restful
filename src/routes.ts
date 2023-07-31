@@ -1,24 +1,14 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
+import PhraseController from "./controller/PhraseController";
+
 const router = Router();
+const phraseController: PhraseController = new PhraseController();
 
-router.get("/random-number", (request: Request, response: Response) => {
-    let randomNumber: Number = Math.floor(Math.random() * 1000);
-    
-    response.status(200).json(
-        {
-            random_number: randomNumber
-        }
-    );
-});
 
-router.get("/name/:name", (request: Request, response: Response) => {
-    let name: String = request.params.name;
-
-    response.status(200).json(
-        {
-            sended_name: name
-        }
-    );
-});
+router.get("/phrases", phraseController.findAll );
+router.get("/phrases/:id", phraseController.findById );
+router.post("/prases", phraseController.save );
+router.put("/phrases/:id", phraseController.update );
+router.delete("/phrases/:id", phraseController.delete );
 
 export default router;
